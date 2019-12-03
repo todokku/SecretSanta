@@ -7,22 +7,31 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="#" />
-    <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico"/>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../static/favicon.ico"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../static/script.js"></script>
   </head>
   <body>
     <div class="container">
-      <h2>Welcome to the Opitmal Secret Santa Generator</h2>
+      <h2>Welcome to the Optimal Secret Santa Generator</h2>
       <!-- <img src="../static/logo.png" alt="Lexus" class="logo" /> -->
       <!-- {% if message %}
       <p class="message">{{ message | safe }}</p>
       {% endif %} -->
       <form action="/submit" method="POST">
-          <div id="group-entry"class="form-group"></div>
-          <input id="add-more" type="button" value="Add more members" class="btn" />
-          <br>
-          <input type="submit" value="Submit" class="btn" />
+        <div id="group-entry" class="form-group"></div>
+        <input
+          id="add-more"
+          type="button"
+          value="Add more members"
+          class="btn"
+        />
+        <br />
+        <input type="submit" value="Submit" class="btn" />
       </form>
     </div>
   </body>

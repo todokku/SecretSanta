@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
 
@@ -21,15 +22,14 @@ db = SQLAlchemy(app)
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
-    customer = db.Column(db.String(200), unique=True)
-    dealer = db.Column(db.String(200))
-    rating = db.Column(db.Integer)
+    uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
+    member = db.Column(db.String(200))
+    email = db.Column(db.String(200), unique=True)
     comments = db.Column(db.Text())
 
-    def __init__(self, customer, dealer, rating, comments):
-        self.customer = customer
-        self.dealer = dealer
-        self.rating = rating
+    def __init__(self, member, email, comments):
+        self.member = member
+        self.email = email
         self.comments = comments
 
 
@@ -41,11 +41,12 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
-        customer = request.form['customer']
-        dealer = request.form['dealer']
-        rating = request.form['rating']
+        member = request.form['member']
+        email = request.form['email']
         comments = request.form['comments']
-        # print(customer, dealer, rating, comments)
+        # print(customer, dealer, comments)
+        return render_template('success.html')
+
         if customer == '' or dealer == '':
             return render_template('index.html', message='Please enter required fields')
 
