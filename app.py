@@ -4,7 +4,7 @@ from send_mail import send_mail
 
 app = Flask(__name__)
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -53,7 +53,7 @@ def submit():
             data = Feedback(customer, dealer, rating, comments)
             db.session.add(data)
             db.session.commit()
-            send_mail(customer, dealer, rating, comments)
+            # send_mail(customer, dealer, rating, comments)
             return render_template('success.html')
         else:
             return render_template('index.html', message='You have already submitted feedback')
