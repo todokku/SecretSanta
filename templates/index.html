@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="#" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../static/script.js"></script>
   </head>
   <body>
     <div class="container">
@@ -17,18 +18,10 @@
       <p class="message">{{ message | safe }}</p>
       {% endif %} -->
       <form action="/submit" method="POST">
-        <fieldset>
-          <legend><h2>Your Group</h2></legend>
-          <div class="form-group">
-            <h3>Your Name</h3>
-            <input type="text" name="customer1" placeholder="Enter Member 1" />
-          </div>
-          <div class="form-group">
-            <h3>Group Members</h3>
-            <input type="text" name="customer2" placeholder="Enter Member 2" />
-          </div>
+          <div id="group-entry"class="form-group"></div>
+          <input id="add-more" type="button" value="Add more members" class="btn" />
+          <br>
           <input type="submit" value="Submit" class="btn" />
-        </fieldset>
       </form>
     </div>
   </body>
