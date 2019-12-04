@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 ENV = 'dev'
 
@@ -43,21 +44,20 @@ def submit():
     if request.method == 'POST':
         member = request.form['member']
         email = request.form['email']
-        comments = request.form['comments']
-        # print(customer, dealer, comments)
+        print(member, email)
         return render_template('success.html')
 
-        if customer == '' or dealer == '':
-            return render_template('index.html', message='Please enter required fields')
+        # if member == '' or email == '':
+        #     return render_template('index.html', message='Please enter required fields')
 
-        if db.session.query(Feedback).filter(Feedback.customer == customer).count() == 0:
-            data = Feedback(customer, dealer, rating, comments)
-            db.session.add(data)
-            db.session.commit()
-            # send_mail(customer, dealer, rating, comments)
-            return render_template('success.html')
-        else:
-            return render_template('index.html', message='You have already submitted feedback')
+        # if db.session.query(Feedback).filter(Feedback.customer == customer).count() == 0:
+        #     data = Feedback(member, email)
+        #     db.session.add(data)
+        #     db.session.commit()
+        #     # send_mail(customer, dealer, rating, comments)
+        #     return render_template('success.html')
+        # else:
+        #     return render_template('index.html', message='You have already submitted feedback')
 
 
 if __name__ == '__main__':
