@@ -1,6 +1,8 @@
+###Needs to be integrated with emailing code in a for loop
+
 import sqlite3
 
-conn = sqlite3.connect('secret_santa_participants.db')
+conn = sqlite3.connect('secret_santa_participants.db') #or whatever the name of the file is
 #first column: group_name
 #second column: first_name
 #third_column: last_name
@@ -14,7 +16,7 @@ last_names = []
 emails = []
 #Arrays to hold all information
 
-select_query = """SELECT * from Contacts""" #Contacts is name of table in example
+select_query = """SELECT * from Contacts""" # "Contacts" is name of table in example
 cursor.execute(select_query)
 records = cursor.fetchall() #set records to pull all data from database
 print("Total rows are: ", len(records))
