@@ -23,12 +23,12 @@ db = SQLAlchemy(app)
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
+    #uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
     member = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
     comments = db.Column(db.Text())
 
-    def __init__(self, member, email, comments):
+    def __init__(self, member, email, comments=''):
         self.member = member
         self.email = email
         self.comments = comments
@@ -45,19 +45,20 @@ def submit():
         member = request.form.getlist('member')
         email = request.form.getlist('email')
         print(member, email)
-        return render_template('success.html')
+        # return render_template('success.html')
 
         if member == '' or email == '':
             return render_template('index.html', message='Please enter required fields')
 
-        if db.session.query(Feedback).filter(Feedback.customer == member).count() == 0:
-            data = Feedback(member, email)
+        # if db.session.query(Feedback).filter(Feedback.member == member).count() == 0:
+        for ii in range(len(member)):
+            data = Feedback(member[ii], email[ii])
             db.session.add(data)
-            db.session.commit()
-            # send_mail(customer, dealer, rating, comments)
-            return render_template('success.html')
-        else:
-            return render_template('index.html', message='You have already submitted feedback')
+        db.session.commit()
+        # send_mail(customer, dealer, rating, comments)
+        return render_template('success.html')
+        # else:
+        #     return render_template('index.html', message='You have already submitted feedback')
 
 
 if __name__ == '__main__':
