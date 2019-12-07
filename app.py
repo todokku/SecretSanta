@@ -62,8 +62,9 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/wishlist/')
-def wishlist():
+@app.route('/wishlist/<user_id>', methods=['GET', 'POST'])
+def wishlist(user_id):
+    if request.method == 'GET'
     return render_template('wishlist.html')
 
 
