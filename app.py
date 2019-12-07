@@ -6,7 +6,7 @@ from send_mail import send_mail
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -45,20 +45,19 @@ def submit():
         member = request.form.getlist('member')
         email = request.form.getlist('email')
         print(member, email)
-        # return render_template('success.html')
 
-        if member == '' or email == '':
-            return render_template('index.html', message='Please enter required fields')
-
-        # if db.session.query(Feedback).filter(Feedback.member == member).count() == 0:
         for ii in range(len(member)):
-            data = Feedback(member[ii], email[ii])
-            db.session.add(data)
+            if member[ii] == '' or email[ii] == '':
+                return render_template('index.html', message='Please enter required fields')
+            else:
+                if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
+                    data = Feedback(member[ii], email[ii])
+                    db.session.add(data)
+                else:
+                    return render_template('index.html', message='You have already submitted feedback')
         db.session.commit()
         # send_mail(customer, dealer, rating, comments)
         return render_template('success.html')
-        # else:
-        #     return render_template('index.html', message='You have already submitted feedback')
 
 
 if __name__ == '__main__':

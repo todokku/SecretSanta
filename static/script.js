@@ -1,4 +1,4 @@
-var size_init = 4;
+var size_init = 3;
 
 $(document).ready(function() {
   for (var i = 1; i < size_init + 1; i++) {
