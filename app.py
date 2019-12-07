@@ -48,17 +48,24 @@ def submit():
 
         for ii in range(len(member)):
             if member[ii] == '' or email[ii] == '':
-                return render_template('index.html', message='Please enter required fields')
+                return render_template('index.html', message='Please ensure all fields are entered')
+            # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
                 if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
                     data = Feedback(member[ii], email[ii])
                     db.session.add(data)
                 else:
-                    return render_template('index.html', message='You have already submitted feedback')
+                    return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
         # send_mail(customer, dealer, rating, comments)
+        # Send mail function - Working to get this updated with bulk emails
         return render_template('success.html')
 
 
+@app.route('/wishlist/')
+def wishlist():
+    return render_template('wishlist.html')
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
