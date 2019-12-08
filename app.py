@@ -47,18 +47,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Feedback(db.Model):
-    __tablename__ = 'feedback'
-    id = db.Column(db.Integer, primary_key=True)
-    #uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
-    member = db.Column(db.String(200))
-    email = db.Column(db.String(200), unique=True)
-    comments = db.Column(db.Text())
+# class Feedback(db.Model):
+#     __tablename__ = 'feedback'
+#     id = db.Column(db.Integer, primary_key=True)
+#     #uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
+#     member = db.Column(db.String(200))
+#     email = db.Column(db.String(200), unique=True)
+#     comments = db.Column(db.Text())
 
-    def __init__(self, member, email, comments=''):
-        self.member = member
-        self.email = email
-        self.comments = comments
+#     def __init__(self, member, email, comments=''):
+#         self.member = member
+#         self.email = email
+#         self.comments = comments
 
 
 @app.route('/')
@@ -82,7 +82,7 @@ def submit():
                 #     data = Feedback(member[ii], email[ii])
                 #     db.session.add(data)
                 token = generate_token(ii['email'])#wiley add start
-                link = url_for('wishlist/<user_id>', token = token, _external = True)
+                link = url_for('wishlist', token = token, _external = True)
                 try:
                     msg = Message('Hello from Optimal Secret Santa!',#subject
                     sender = 'OptimalSecretSanta@gmail.com',
@@ -101,7 +101,7 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/wishlist/<user_id>', methods=['GET', 'POST'])
+@app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist(user_id):
     return render_template('wishlist.html')
 
