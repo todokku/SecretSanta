@@ -78,24 +78,24 @@ def submit():
                 return render_template('index.html', message='Please ensure all fields are entered')
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
-                if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
-                    data = Feedback(member[ii], email[ii])
-                    db.session.add(data)
-                    # token = generate_token(ii['email'])#wiley add start
-                    # link = url_for('wishlist/<user_id>', token = token, _external = True)
-                    # try:
-                    #     msg = Message('Hello from Optimal Secret Santa!',#subject
-                    #     sender = 'OptimalSecretSanta@gmail.com',
-                    #     recipients = [email[ii]])
-                    #     msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta."
-                    #     thr = Thread(target=send_thread_email, args=[msg])
-                    #     thr.start()#wiley add end
-                    #     return
-                    # except Exception as e:
-                    #     return str(e)
-                else:
-                    return render_template('index.html', message='A user with this email is already a part of Secret Santa')
-        db.session.commit()
+                # if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
+                #     data = Feedback(member[ii], email[ii])
+                #     db.session.add(data)
+                token = generate_token(ii['email'])#wiley add start
+                link = url_for('wishlist/<user_id>', token = token, _external = True)
+                try:
+                    msg = Message('Hello from Optimal Secret Santa!',#subject
+                    sender = 'OptimalSecretSanta@gmail.com',
+                    recipients = [email[ii]])
+                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta."
+                    thr = Thread(target=send_thread_email, args=[msg])
+                    thr.start()#wiley add end
+                    return
+                except Exception as e:
+                    return str(e)
+            # else:
+                return render_template('index.html', message='A user with this email is already a part of Secret Santa')
+        #db.session.commit()
         # send_mail(customer, dealer, rating, comments)
         # Send mail function - Working to get this updated with bulk emails
         return render_template('success.html')
