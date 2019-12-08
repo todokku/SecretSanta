@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
 
@@ -20,18 +19,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Feedback(db.Model):
-    __tablename__ = 'feedback'
+class SecretSanta(db.Model):
+    __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
-    #uuid = db.Column(UUID(as_uuid=True), unique=True, nullable=False)
+    uuid = db.Column(db.String(200), unique=True)
     member = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
-    comments = db.Column(db.Text())
+    wishlist = db.Column(db.Text())
+    partner = db.Column(db.String(200))
 
-    def __init__(self, member, email, comments=''):
+    def __init__(self, member, email, wishlist=''):
         self.member = member
         self.email = email
-        self.comments = comments
+        # self.uuid = uuid
+        self.wishlist = wishlist
+        # self.partner = partner
 
 
 @app.route('/')
@@ -51,8 +53,9 @@ def submit():
                 return render_template('index.html', message='Please ensure all fields are entered')
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
-                if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
-                    data = Feedback(member[ii], email[ii])
+                if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
+
+                    data = SecretSanta(member[ii], email[ii])
                     db.session.add(data)
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
@@ -62,9 +65,8 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/wishlist/<user_id>', methods=['GET', 'POST'])
+@app.route('/wishlist/<user_id>', methods=['POST', 'GET'])
 def wishlist(user_id):
-    if request.method == 'GET'
     return render_template('wishlist.html')
 
 
