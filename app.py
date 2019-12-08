@@ -1,11 +1,37 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for#added by Wiley for link gen
+from flask_mail import Mail, Message#added by Wiley for flaskmail
+from itsdangerous import URLSafeSerializer#added by Wiley for url generator
+from threading import Thread#added by Wiley for asynch emailing
+from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
-from send_mail import send_mail
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-ENV = 'dev'
+app.config.update(#added by Wiley
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'OptimalSecretSanta@gmail.com',
+	MAIL_PASSWORD = 'AllIwantforChristmasisanA',
+    SECRET_KEY = "PanatLovesDogs",
+    MAIL_MAX_EMAILS = 1000
+	)
+
+mail=Mail(app) #added by Wiley
+s = URLSafeSerializer(app.config['SECRET_KEY']) #added by Wiley
+
+def generate_token(email): #added by Wiley
+    token = s.dumps(email, salt= 'email-confirm')
+    return token
+
+def send_thread_email(msg):#added by Wiley
+    with app.app_context():
+        mail.send(msg)
+
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
@@ -22,19 +48,18 @@ db = SQLAlchemy(app)
 class SecretSanta(db.Model):
     __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(db.String(200), unique=True)
     member = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
     wishlist = db.Column(db.Text())
     partner = db.Column(db.String(200))
 
-    def __init__(self, member, email, wishlist=''):
+
+    def __init__(self, member, email):
         self.member = member
         self.email = email
         # self.uuid = uuid
         self.wishlist = wishlist
         # self.partner = partner
-
 
 @app.route('/')
 def index():
@@ -57,15 +82,22 @@ def submit():
 
                     data = SecretSanta(member[ii], email[ii])
                     db.session.add(data)
+                    token = generate_token(email[ii])#wiley add start
+                    link = url_for('wishlist', token = token, _external = True)
+                    msg = Message('Hello from Optimal Secret Santa!',#subject
+                    sender = 'OptimalSecretSanta@gmail.com',
+                    recipients = [email[ii]])
+                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta."
+                    thr = Thread(target=send_thread_email, args=[msg])
+                    thr.start()#wiley add end
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
-        # send_mail(customer, dealer, rating, comments)
-        # Send mail function - Working to get this updated with bulk emails
         return render_template('success.html')
 
 
-@app.route('/wishlist/<user_id>', methods=['POST', 'GET'])
+@app.route('/wishlist', methods=['GET', 'POST'])
+
 def wishlist(user_id):
     return render_template('wishlist.html')
 

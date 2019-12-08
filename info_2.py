@@ -1,0 +1,2 @@
+thatone = 'AllIwantforChristmasisanA'
+thattwo = "PanatLovesDogs"
