@@ -8,6 +8,19 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+ENV = 'prod'
+
+if ENV == 'dev':
+    app.debug = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:g4qtyx7v@localhost/test_db'
+else:
+    app.debug = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zyyzysejezblhz:17a351947912f2433f7d4ca45121650d224b002543e633d521e57d4c4bb6d874@ec2-174-129-253-63.compute-1.amazonaws.com:5432/ddui50dco58tad'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 app.config.update(#added by Wiley
 	DEBUG=True,
 	#EMAIL SETTINGS
@@ -30,19 +43,6 @@ def generate_token(email): #added by Wiley
 def send_thread_email(msg):#added by Wiley
     with app.app_context():
         mail.send(msg)
-
-ENV = 'prod'
-
-if ENV == 'dev':
-    app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:g4qtyx7v@localhost/test_db'
-else:
-    app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zyyzysejezblhz:17a351947912f2433f7d4ca45121650d224b002543e633d521e57d4c4bb6d874@ec2-174-129-253-63.compute-1.amazonaws.com:5432/ddui50dco58tad'
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
 
 
 class SecretSanta(db.Model):
