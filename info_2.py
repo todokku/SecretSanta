@@ -1,2 +1,2 @@
-MAIL_PASSWORD = 'AllIwantforChristmasisanA'
-SECRET_KEY = "PanatLovesDogs"
+thatone = 'AllIwantforChristmasisanA'
+thattwo = "PanatLovesDogs"
