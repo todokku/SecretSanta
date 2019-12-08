@@ -33,7 +33,7 @@ def send_thread_email(msg):#added by Wiley
     with app.app_context():
         mail.send(msg)
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
