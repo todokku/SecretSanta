@@ -28,11 +28,11 @@ class SecretSanta(db.Model):
     wishlist = db.Column(db.Text())
     partner = db.Column(db.String(200))
 
-    def __init__(self, member, email, wishlist=''):
+    def __init__(self, member, email):
         self.member = member
         self.email = email
         # self.uuid = uuid
-        self.wishlist = wishlist
+        # self.wishlist = wishlist
         # self.partner = partner
 
 
