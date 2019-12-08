@@ -54,7 +54,6 @@ def submit():
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
                 if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
-
                     data = SecretSanta(member[ii], email[ii])
                     db.session.add(data)
                 else:
