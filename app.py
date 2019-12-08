@@ -4,6 +4,7 @@ from itsdangerous import URLSafeSerializer#added by Wiley for url generator
 from threading import Thread#added by Wiley for asynch emailing
 from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
+import random
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -60,6 +61,24 @@ class SecretSanta(db.Model):
         # self.wishlist = wishlist
         # self.partner = partner
 
+def generate_pairings(emails):
+    f = {}  # dict containing name:group
+    for i, line in enumerate(emails):
+        group = line.strip().split(" ")
+        f.update({p: i for p in group})
+    names = list(f.keys())
+
+    while True:
+        random.shuffle(names)
+        assignments = {a: b for a, b in zip(names, names[1:] + [names[0]])}
+        if all([f[a] != f[b] for a, b in assignments.items()]):
+            break
+    pairs = [None]*len(names)
+    for a, b in assignments.items():
+        pairs[f[a]] = b
+    return pairs
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -70,7 +89,8 @@ def submit():
     if request.method == 'POST':
         member = request.form.getlist('member')
         email = request.form.getlist('email')
-        print(member, email)
+        pair = generate_pairings(email)
+        print(member, email, pair)
 
         for ii in range(len(member)):
             if member[ii] == '' or email[ii] == '':
@@ -78,7 +98,7 @@ def submit():
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
                 if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
-                    data = SecretSanta(member[ii], email[ii])
+                    data = SecretSanta(member=member[ii], email=email[ii], partner=pair[ii])
                     db.session.add(data)
                     token = generate_token(email[ii])#wiley add start
                     link = url_for('wishlist', token = token, _external = True)
