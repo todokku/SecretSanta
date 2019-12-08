@@ -1,10 +1,37 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for#added by Wiley for link gen
+from flask_mail import Mail, Message#added by Wiley for flaskmail
+from itsdangerous import URLSafeSerializer#added by Wiley for url generator
+from threading import Thread#added by Wiley for asynch emailing
 from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
+import info
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+app.config.update(#added by Wiley
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'OptimalSecretSanta@gmail.com',
+	MAIL_PASSWORD = info.MAIL_PASSWORD,
+    SECRET_KEY = info.SECRET_KEY,
+    MAIL_MAX_EMAILS = 1000
+	)
+
+mail=Mail(app) #added by Wiley
+s = URLSafeSerializer(app.config['SECRET_KEY']) #added by Wiley
+
+def generate_token(email): #added by Wiley
+    token = s.dumps(email, salt= 'email-confirm')
+    return token
+
+def send_thread_email(msg):#added by Wiley
+    with app.app_context():
+        mail.send(msg)
 
 ENV = 'dev'
 
@@ -54,6 +81,14 @@ def submit():
                 if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
                     data = Feedback(member[ii], email[ii])
                     db.session.add(data)
+                    token = generate_token(email[ii])#wiley add start
+                    link = url_for('wishlist/<user_id>', token = token, _external = True)
+                    msg = Message('Hello from Optimal Secret Santa!',#subject
+                    sender = 'OptimalSecretSanta@gmail.com',
+                    recipients= [email[ii]])
+                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta."
+                    thr = Thread(target=send_thread_email, args=[msg])
+                    thr.start()#wiley add end
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
