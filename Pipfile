@@ -13,6 +13,7 @@ psycopg2 = "*"
 psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.8"
