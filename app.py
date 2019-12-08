@@ -5,7 +5,7 @@ from threading import Thread#added by Wiley for asynch emailing
 from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
-import info
+import info_2
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -17,8 +17,8 @@ app.config.update(#added by Wiley
 	MAIL_PORT=465,
 	MAIL_USE_SSL=True,
 	MAIL_USERNAME = 'OptimalSecretSanta@gmail.com',
-	MAIL_PASSWORD = info.that_one,
-    SECRET_KEY = info.that_two,
+	MAIL_PASSWORD = info_2.that_one,
+    SECRET_KEY = info_2.that_two,
     MAIL_MAX_EMAILS = 1000
 	)
 
