@@ -44,7 +44,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
 class SecretSanta(db.Model):
     __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
@@ -58,7 +57,7 @@ class SecretSanta(db.Model):
         self.member = member
         self.email = email
         # self.uuid = uuid
-        self.wishlist = wishlist
+        # self.wishlist = wishlist
         # self.partner = partner
 
 @app.route('/')
@@ -79,7 +78,6 @@ def submit():
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
                 if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
-
                     data = SecretSanta(member[ii], email[ii])
                     db.session.add(data)
                     token = generate_token(email[ii])#wiley add start
@@ -87,7 +85,7 @@ def submit():
                     msg = Message('Hello from Optimal Secret Santa!',#subject
                     sender = 'OptimalSecretSanta@gmail.com',
                     recipients = [email[ii]])
-                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta."
+                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
                     thr = Thread(target=send_thread_email, args=[msg])
                     thr.start()#wiley add end
                 else:
