@@ -4,8 +4,6 @@ from itsdangerous import URLSafeSerializer#added by Wiley for url generator
 from threading import Thread#added by Wiley for asynch emailing
 from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
-from send_mail import send_mail
-import info_2
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -47,16 +45,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Feedback(db.Model):
-    __tablename__ = 'feedback'
+class SecretSanta(db.Model):
+    __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
     member = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
-    comments = db.Column(db.Text())
+    wishlist = db.Column(db.Text())
+    partner = db.Column(db.String(200))
+
 
     def __init__(self, member, email):
         self.member = member
         self.email = email
+        # self.uuid = uuid
+        self.wishlist = wishlist
+        # self.partner = partner
 
 @app.route('/')
 def index():
@@ -75,8 +78,9 @@ def submit():
                 return render_template('index.html', message='Please ensure all fields are entered')
             # elif: // Email validation goes here (Using email-validator pkg from pip)
             else:
-                if db.session.query(Feedback).filter(Feedback.email == email[ii]).count() == 0:
-                    data = Feedback(member[ii], email[ii])
+                if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
+
+                    data = SecretSanta(member[ii], email[ii])
                     db.session.add(data)
                     token = generate_token(email[ii])#wiley add start
                     link = url_for('wishlist', token = token, _external = True)
@@ -93,6 +97,7 @@ def submit():
 
 
 @app.route('/wishlist', methods=['GET', 'POST'])
+
 def wishlist(user_id):
     return render_template('wishlist.html')
 
