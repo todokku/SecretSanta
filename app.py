@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for
 from flask_mail import Mail, Message  # added by Wiley for flaskmail
 from itsdangerous import URLSafeSerializer  # added by Wiley for url generator
 from threading import Thread  # added by Wiley for asynch emailing
-from sqlalchemy.dialects.postgresql import UUID
+# from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 import random
 
@@ -36,7 +36,7 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
