@@ -20,8 +20,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    MAIL_PASSWORD='DensmoresLittleCoders',
-    SECRET_KEY='JoshLovesSleep',
+    MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
+    SECRET_KEY=os.environ['SPECIAL_KEY'],
     MAIL_MAX_EMAILS=1000
 )
 
@@ -39,7 +39,7 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV = 'STATE'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
