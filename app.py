@@ -10,6 +10,9 @@ import random
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+MAIL_PASSWORD = 'EMAIL_PASSWORD'
+SECRET_KEY = 'SPECIAL_KEY'
+
 app.config.update(  # added by Wiley
     DEBUG=True,
     # EMAIL SETTINGS
@@ -17,8 +20,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    MAIL_PASSWORD='EMAIL_PASSWORD',
-    SECRET_KEY='SPECIAL_KEY',
+    MAIL_PASSWORD=MAIL_PASSWORD,
+    SECRET_KEY=SECRET_KEY,
     MAIL_MAX_EMAILS=1000
 )
 
