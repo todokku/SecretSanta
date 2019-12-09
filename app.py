@@ -17,8 +17,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    MAIL_PASSWORD='MAIL_PASSWORD',
-    SECRET_KEY='SECRET_KEY',
+    MAIL_PASSWORD='EMAIL_PASSWORD',
+    SECRET_KEY='SPECIAL_KEY',
     MAIL_MAX_EMAILS=1000
 )
 
