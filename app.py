@@ -36,7 +36,7 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV => ENV['STATE']
+ENV = 'STATE'
 
 if ENV == 'dev':
     app.debug = True
