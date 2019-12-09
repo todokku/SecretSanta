@@ -36,7 +36,7 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV = ENV['STATE']
+ENV => ENV['STATE']
 
 if ENV == 'dev':
     app.debug = True
@@ -47,7 +47,7 @@ else:
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db => SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 
 class SecretSanta(db.Model):
