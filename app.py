@@ -57,7 +57,6 @@ db = SQLAlchemy(app)
 class SecretSanta(db.Model):
     __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(db.String(200), unique=True)
     member = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
     wishlist = db.Column(db.Text())
