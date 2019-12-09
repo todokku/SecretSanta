@@ -6,6 +6,7 @@ from threading import Thread  # added by Wiley for asynch emailing
 # from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
 import random
+import os
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
