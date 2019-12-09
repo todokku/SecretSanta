@@ -47,7 +47,7 @@ else:
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db => SQLAlchemy(app)
 
 
 class SecretSanta(db.Model):
