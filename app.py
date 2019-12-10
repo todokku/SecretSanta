@@ -123,9 +123,10 @@ def submit():
         return render_template('success.html')
 
 
+@app.route('/wishlist/')
 @app.route('/wishlist/<userid>')
-def wishlist(userid):
-    return render_template('wishlist.html')
+def wishlist(userid=None):
+    return render_template('wishlist.html', userid=userid)
 
 
 if __name__ == '__main__':
