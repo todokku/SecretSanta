@@ -105,6 +105,9 @@ def submit():
             if member[ii] == '' or email[ii] == '':
                 return render_template('index.html', message='Please ensure all fields are entered')
             # elif: // Email validation goes here (Using email-validator pkg from pip)
+            # Checks if each email in the list is unique by comparing to a set
+            elif len(email) >= len(set(email)):
+                return render_template('index.html', message='A user with this email is already a part of Secret Santa')
             else:
                 if db.session.query(SecretSanta).filter(SecretSanta.email == email[ii]).count() == 0:
                     data = SecretSanta(
