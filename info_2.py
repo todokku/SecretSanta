@@ -1,2 +1,0 @@
-thatone = 'AllIwantforChristmasisanA'
-thattwo = "PanatLovesDogs"
