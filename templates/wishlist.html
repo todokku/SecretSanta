@@ -15,7 +15,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1>This Is the Wishlist Page!</h1>
-    <p>This is where the wishlist will appear</p>
+    <h2>Welcome back! Please enter your Secret Santa Wishlist</h2>
+    <form action="/submit" method="POST">
+      <div id="group-entry" class="form-group">
+        Please enter your email:<br />
+        <input type="text" />
+        <br />
+        <input type="submit" value="Submit" class="btn" />
+        <br />
+        <br />
+        <textarea
+          name="wishlist"
+          id="wishlist"
+          placeholder="Please enter your wishlist here!"
+          cols="50"
+          rows="10"
+        ></textarea>
+      </div>
+      <br />
+      <input type="submit" value="Submit" class="btn" />
+    </form>
   </body>
 </html>
