@@ -126,7 +126,7 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/wishlist', methods=['GET', 'POST'])
+@app.route('/wishlist')
 def wishlist():
     return render_template('wishlist.html')
 
