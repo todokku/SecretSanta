@@ -16,6 +16,9 @@
   </head>
   <body>
     <h2>Welcome back! Please enter your Secret Santa Wishlist</h2>
+    {% if message %}
+    <p class="message">{{ message | safe }}</p>
+    {% endif %}
     <form action="/submit" method="POST">
       <div id="group-entry" class="form-group">
         Please enter your email:<br />
