@@ -66,7 +66,6 @@ To deploy this app on Heroku, follow the instructions on how to [Deploy A Python
 * [Flask](https://palletsprojects.com/p/flask/) - The web framework used
 * [SQLAlchemy](https://www.sqlalchemy.org/) - Database toolkit
 * [Heroku](https://www.heroku.com/) - Cloud hosting platform
-* 
 
 ## Authors
 
