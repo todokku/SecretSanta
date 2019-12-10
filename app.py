@@ -100,7 +100,9 @@ def submit():
         email = request.form.getlist('email')
         pair = generate_pairings(email)
         print(member, email, pair)
-
+        # Checks if each email in the list is unique by comparing to a set
+        if len(email) >= len(set(email)):
+            return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         for ii in range(len(member)):
             if member[ii] == '' or email[ii] == '':
                 return render_template('index.html', message='Please ensure all fields are entered')
