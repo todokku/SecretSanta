@@ -62,6 +62,19 @@ then navigate to http://localhost:5000/ or wherever the Flask website is running
 
 To deploy this app on Heroku, follow the instructions on how to [Deploy A Python Web App on Heroku](https://gist.github.com/bradtraversy/0029d655269c8a972df726ed0ac56b88).
 
+## Testing
+
+To test the algorithm locally without deploying the web app, run `test.py` inside the [misc][/misc] folder.
+```
+$ python test.py
+Panat (3) -> Ben (0)
+Ben (0) -> Josh (1)
+Josh (1) -> Wiley (2)
+Wiley (2) -> Ken (4)
+Ken (4) -> Panat (3)
+
+```
+
 ## Built With
 
 * [Flask](https://palletsprojects.com/p/flask/) - The web framework used
