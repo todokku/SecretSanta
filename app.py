@@ -23,8 +23,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    # MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
-    # SECRET_KEY=os.environ['SPECIAL_KEY'],
+    MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
+    SECRET_KEY=os.environ['SPECIAL_KEY'],
     MAIL_MAX_EMAILS=1000
 )
 
@@ -42,7 +42,7 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
@@ -111,14 +111,14 @@ def submit():
                     data = SecretSanta(
                         member=member[ii], email=email[ii], partner=pair[ii])
                     db.session.add(data)
-                    # token = generate_token(email[ii])  # wiley add start
-                    # link = url_for('wishlist', token=token, _external=True)
-                    # msg = Message('Hello from Optimal Secret Santa!',  # subject
-                    #               sender='OptimalSecretSanta@gmail.com',
-                    #               recipients=[email[ii]])
-                    # msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
-                    # thr = Thread(target=send_thread_email, args=[msg])
-                    # thr.start()  # wiley add end
+                    token = generate_token(email[ii])  # wiley add start
+                    link = url_for('wishlist', token=token, _external=True)
+                    msg = Message('Hello from Optimal Secret Santa!',  # subject
+                                  sender='OptimalSecretSanta@gmail.com',
+                                  recipients=[email[ii]])
+                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
+                    thr = Thread(target=send_thread_email, args=[msg])
+                    thr.start()  # wiley add end
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
