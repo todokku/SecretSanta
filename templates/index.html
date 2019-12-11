@@ -1,37 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Optimal Secret Santa</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="#" />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../static/favicon.ico"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Welcome to the Optimal Secret Santa Generator</h2>
-      {% if message %}
-      <p class="message">{{ message | safe }}</p>
-      {% endif %}
-      <form action="/submit" method="POST">
-        <div id="group-entry" class="form-group"></div>
-        <input
-          id="add-more"
-          type="button"
-          value="Add more members"
-          class="btn"
-        />
-        <br />
-        <input type="submit" value="Submit" class="btn" />
-      </form>
-    </div>
-  </body>
-  <script type="text/javascript" src="../static/script.js"></script>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/secret_santa_website.css">
+<script type="text/javascript" src="../static/secret_santa_website.js"></script>
+<body>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-center" style="max-width:1500px"> 
+  <img class="w3-image" src="../static/background_1.png" alt="secretsanta" width="1500" height="600">
+  <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey" style = "margin-top: -15%; font-size: 175%;";>
+    <h1 class="w3-hide-medium w3-hide-small w3-xxxxlarge">OPTIMAL</h1>
+    <h5 class="w3-hide-large" style="white-space:nowrap">SECRET SANTA</h5>
+    <h3 class="w3-hide-medium w3-hide-small">SECRET SANTA</h3>
+  </div>
+  
+  <!-- Navbar (placed at the bottom of the header image) 
+  <div class="w3-bar w3-round w3-display-bottommiddle w3-hide-small w3-font" style="bottom:-16px">
+    <a href="#" class="w3-bar-item w3-button">Home</a>
+    <a href="#portfolio" class="w3-bar-item w3-button">About</a>
+    <a href="#contact" class="w3-bar-item w3-button">Create A Group</a>
+  </div>-->
+</header>
+
+<!-- Navbar on small screens -->
+
+</div>
+<!-- Page content -->
+<div class="w3-content w3-padding-large w3-margin-top" id="About">
+
+  
+  <h2 class = "w3-center"></h2>
+    <p> </p>
+
+  <img src="../static/infographic1.png" alt="infographic" class="w3-image w3-margin-top" width="1000" height="500">
+
+  <!-- Create A group -->
+  <div class=" w3-padding-large w3-padding-32 w3-margin-top" id="Create A Group" width = "750";>
+    <h3 class="w3-center Welcome">CREATE A GROUP</h3>
+    <hr>
+    <p class = "w3-center">
+        
+    </p>
+    <form action="/action_page.php" target="_blank">
+      <div class="CreateAGroup Welcome" style = "text-align: center">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <body>
+        
+        <form action="/submit" method="POST">
+            <div id="group-entry"  style = "text-align: center; align-content: center;"></div>
+            <input
+              id="add-more"
+              type="button"
+              value="Add Members"
+              class="w3-bar-item w3-button w3-width w3-font w3-background-color w3-bar w3-round  w3-hide-small" 
+              style="margin-bottom: 15px; text-align: center;"
+            ></input>
+            <br />
+            <input 
+            type="submit" 
+            value="Submit" 
+            class=" w3-button w3-width w3-font w3-background-color w3-bar w3-round  w3-hide-small"
+            style = "text-align: center;"
+            ></input>
+          </form>
+        </div>
+      </body>
+      <script type="text/javascript" src="secret_santa_website.js"></script>
+    </body>
+
+  </div>
+
+<!-- End page content -->
+</div>
+
+</body>
 </html>
