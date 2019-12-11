@@ -67,11 +67,11 @@ To deploy this app on Heroku, follow the instructions on how to [Deploy A Python
 To test the algorithm locally without deploying the web app, run `test.py` inside the [misc](misc) folder.
 ```
 $ python test.py
-Panat (3) -> Ben (0)
-Ben (0) -> Josh (1)
-Josh (1) -> Wiley (2)
-Wiley (2) -> Ken (4)
-Ken (4) -> Panat (3)
+Panat (3) -> Ben   (0)
+Ben   (0) -> Josh  (1)
+Josh  (1) -> Wiley (2)
+Wiley (2) -> Ken   (4)
+Ken   (4) -> Panat (3)
 
 ```
 
