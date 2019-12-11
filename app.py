@@ -148,7 +148,7 @@ def wish_submit():
         msg.body = F"Hi {result.member},\n\n You have been assigned as the Secret Santa for {partner_name}.Their wishlist is included below: \n\n{result.wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
         thr = Thread(target=send_thread_email, args=[msg])
         thr.start()  # wiley add end
-        return render_template('success.html')
+        return render_template('success_wishlist.html')
 
 
 if __name__ == '__main__':
