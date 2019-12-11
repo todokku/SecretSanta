@@ -149,16 +149,16 @@ def wish_submit():
                 # name of who we email
                 name_of_who_to_email = records[i]['member']
                 break
-            else:
-                continue
+            #else:
+               # continue
 
         for j in records:
             if j['email'] == partner:  # if the entered email is at row index i in 'email' column, the name of the target is at that same index in 'member' column
                 # NAme of persons secret santa
                 name_of_secret_santa = records[j]['member']
                 break
-            else:
-                continue
+            #else:
+                #continue
         msg = Message('Your Secret Santa Assignment is in!',  # subject
                       sender='OptimalSecretSanta@gmail.com',
                       recipients=[who_to_email])
