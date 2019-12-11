@@ -139,9 +139,9 @@ def wish_submit():
         result = SecretSanta.query.filter_by(partner=partner).first()
         result.email
         partner_email = SecretSanta.query.filter_by(email=parter).first()
-        parter_name = partner_email.member
-        #print(partner, wlist, result.email,
-              #result.member, result.id, result.partner)
+        parter_name = str(partner_email.member)
+        # print(partner, wlist, result.email,
+        # result.member, result.id, result.partner)
         msg = Message('Your Secret Santa Assignment is in!',  # subject
                       sender='OptimalSecretSanta@gmail.com',
                       recipients=[result.email])
