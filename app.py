@@ -5,7 +5,8 @@ from itsdangerous import URLSafeSerializer  # added by Wiley for url generator
 from threading import Thread  # added by Wiley for asynch emailing
 # from sqlalchemy.dialects.postgresql import UUID
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import select
+from sqlalchemy import create_engine
+from sqlalchemy.sql import select, column
 import random
 import os
 
@@ -22,8 +23,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
-    SECRET_KEY=os.environ['SPECIAL_KEY'],
+    # MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
+    # SECRET_KEY=os.environ['SPECIAL_KEY'],
     MAIL_MAX_EMAILS=1000
 )
 
@@ -41,11 +42,11 @@ def send_thread_email(msg):  # added by Wiley
         mail.send(msg)
 
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:[LOCAL_POSTGRES_PASSWORD]@localhost/test_db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:g4qtyx7v@localhost/test_db'
 else:
     app.debug = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zyyzysejezblhz:17a351947912f2433f7d4ca45121650d224b002543e633d521e57d4c4bb6d874@ec2-174-129-253-63.compute-1.amazonaws.com:5432/ddui50dco58tad'
@@ -110,14 +111,14 @@ def submit():
                     data = SecretSanta(
                         member=member[ii], email=email[ii], partner=pair[ii])
                     db.session.add(data)
-                    token = generate_token(email[ii])  # wiley add start
-                    link = url_for('wishlist', token=token, _external=True)
-                    msg = Message('Hello from Optimal Secret Santa!',  # subject
-                                  sender='OptimalSecretSanta@gmail.com',
-                                  recipients=[email[ii]])
-                    msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
-                    thr = Thread(target=send_thread_email, args=[msg])
-                    thr.start()  # wiley add end
+                    # token = generate_token(email[ii])  # wiley add start
+                    # link = url_for('wishlist', token=token, _external=True)
+                    # msg = Message('Hello from Optimal Secret Santa!',  # subject
+                    #               sender='OptimalSecretSanta@gmail.com',
+                    #               recipients=[email[ii]])
+                    # msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
+                    # thr = Thread(target=send_thread_email, args=[msg])
+                    # thr.start()  # wiley add end
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
@@ -133,10 +134,12 @@ def wishlist(userid=None):
 @app.route('/return', methods=['POST'])
 def wish_submit():
     if request.method == 'POST':
-        partner = request.form.get('partner')
-        wlist = request.form.get('wishlist')
-        s = db.select([secretsanta]).where(secretsanta.columns.partner == partner)
-        print(partner, wlist, s)
+        partner = str(request.form.get('partner'))
+        wlist = str(request.form.get('wishlist'))
+        result = SecretSanta.query.filter_by(partner=partner).first()
+        result.email
+        print(partner, wlist, result.email,
+              result.member, result.id, result.partner)
         return render_template('success.html')
 
 
