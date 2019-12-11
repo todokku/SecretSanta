@@ -140,14 +140,14 @@ def wish_submit():
             engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
             records = engine.execute('SELECT * FROM "secretsanta"').fetchall()
         except:
-            #print("FAILURE TO CONNECT TO DATABASE")
-            return("FAILURE TO CONNECT TO DATABASE")#wiley experiment
+            print("FAILURE TO CONNECT TO DATABASE")
+            #return("FAILURE TO CONNECT TO DATABASE")#wiley experiment
             exit()
 
         for i in records:
             if i['partner'] == partner:  # if the entered email is at row index i in 'partner' column, who to email is at that same index in 'email' column
                 who_to_email = records[i]['email']  # who we email
-                return who_to_email #wiley experiment
+                #return who_to_email #wiley experiment
                 # name of who we email
                 name_of_who_to_email = records[i]['member']
                 break
