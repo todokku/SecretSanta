@@ -64,7 +64,7 @@ To deploy this app on Heroku, follow the instructions on how to [Deploy A Python
 
 ## Testing
 
-To test the algorithm locally without deploying the web app, run `test.py` inside the [misc](misc/test.py) folder.
+To test the algorithm locally without deploying the web app, run `test.py` inside the [misc](misc) folder.
 ```
 $ python test.py
 Panat (3) -> Ben (0)
