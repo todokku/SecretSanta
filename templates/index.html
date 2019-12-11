@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Optimal Secret Santa</title>
+<title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../static/secret_santa_website.css">
-<script type="text/javascript" src="../templates/secret_santa_website.js"></script>
-</head>
-
-<!--<body>-->
+<!--<script type="text/javascript" src="../static/secret_santa_website.js"></script>-->
+<body>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-center" style="max-width:1500px"> 
@@ -17,7 +14,6 @@
     <h1 class="w3-hide-medium w3-hide-small w3-xxxxlarge">OPTIMAL</h1>
     <h5 class="w3-hide-large" style="white-space:nowrap">SECRET SANTA</h5>
     <h3 class="w3-hide-medium w3-hide-small">SECRET SANTA</h3>
-  
   </div>
   
   <!-- Navbar (placed at the bottom of the header image) 
@@ -30,6 +26,7 @@
 
 <!-- Navbar on small screens -->
 
+</div>
 <!-- Page content -->
 <div class="w3-content w3-padding-large w3-margin-top" id="About">
 
@@ -46,6 +43,7 @@
     <p class = "w3-center">
         
     </p>
+    <form action="/action_page.php" target="_blank">
       <div class="CreateAGroup Welcome" style = "text-align: center">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
@@ -59,24 +57,53 @@
               value="Add Members"
               class="w3-bar-item w3-button w3-width w3-font w3-background-color w3-bar w3-round  w3-hide-small" 
               style="margin-bottom: 15px; text-align: center;"
-            >
+            ></input>
             <br />
             <input 
             type="submit" 
             value="Submit" 
             class=" w3-button w3-width w3-font w3-background-color w3-bar w3-round  w3-hide-small"
             style = "text-align: center;"
-            >
+            ></input>
           </form>
         </div>
-     <!-- </body>
-      <script type="text/javascript" src="secret_santa_website.js"></script>
-    </body> 
+      </body>
+      <script>var size_init = 3;
+
+        $(document).ready(function() {
+          for (var i = 1; i < size_init + 1; i++) {
+            var name_input = $('<input type="text"><br/>');
+            name_input.attr("name", "member");
+            name_input.attr("placeholder", "Enter Member " + i + "'s Name");
+            $("#group-entry").append(name_input);
+        
+            var email_input = $('<input type="text"><br/><br/>');
+            email_input.attr("name", "email");
+            email_input.attr("placeholder", "Enter Member " + i + "'s Email");
+            $("#group-entry").append(email_input);
+            // $("input").addClass("member");
+          }
+        
+          $("#add-more").click(function() {
+            size_init++;
+            var name_input = $('<input type="text"><br/>');
+            name_input.attr("name", "member");
+            name_input.attr("placeholder", "Enter Member " + size_init + "'s Name");
+            $("#group-entry").append(name_input);
+        
+            var email_input = $('<input type="text"><br/><br/>');
+            email_input.attr("name", "email");
+            email_input.attr("placeholder", "Enter Member " + size_init + "'s Email");
+            $("#group-entry").append(email_input);
+            //$("input").addClass("member");
+          });
+        });</script> 
+    </body>
 
   </div>
 
- End page content -->
+<!-- End page content -->
 </div>
 
-
+</body>
 </html>
