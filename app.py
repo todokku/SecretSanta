@@ -159,12 +159,12 @@ def wish_submit():
                 break
             else:
                 continue
-            msg = Message('Your Secret Santa Assignment is in!',  # subject
-                          sender='OptimalSecretSanta@gmail.com',
-                          recipients=[who_to_email])
-            msg.body = F"Hi {name_of_who_to_email},\n\n You have been assigned as the Secret Santa for {name_of_secret_santa}.Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
-            thr = Thread(target=send_thread_email, args=[msg])
-            thr.start()  # wiley add end
+        msg = Message('Your Secret Santa Assignment is in!',  # subject
+                      sender='OptimalSecretSanta@gmail.com',
+                      recipients=[who_to_email])
+        msg.body = F"Hi {name_of_who_to_email},\n\n You have been assigned as the Secret Santa for {name_of_secret_santa}.Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
+        thr = Thread(target=send_thread_email, args=[msg])
+        thr.start()  # wiley add end
         print(partner, wlist)
         return render_template('success.html')
 
