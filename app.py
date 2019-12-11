@@ -1,5 +1,6 @@
 # added by Wiley for link gen
 from flask import Flask, render_template, request, url_for
+from sqlalchemy import create_engine
 from flask_mail import Mail, Message  # added by Wiley for flaskmail
 from itsdangerous import URLSafeSerializer  # added by Wiley for url generator
 from threading import Thread  # added by Wiley for asynch emailing
@@ -21,8 +22,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    # MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
-    # SECRET_KEY=os.environ['SPECIAL_KEY'],
+    MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
+    SECRET_KEY=os.environ['SPECIAL_KEY'],
     MAIL_MAX_EMAILS=1000
 )
 
@@ -123,11 +124,49 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/return')
-def wishlist():
+@app.route('/wishlist/')
+@app.route('/wishlist/<userid>')
+def wishlist(userid=None):
+    return render_template('wishlist.html', userid=userid)
+
+
+@app.route('/return', methods=['POST'])
+def wish_submit():
     if request.method == 'POST':
         partner = request.form.get('partner')
-        return render_template('wishlist.html', userid=userid)
+        wlist = request.form.get('wishlist')
+
+        try:
+            engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+            records = engine.execute('SELECT * FROM "secretsanta"').fetchall()
+        except:
+            print("FAILURE TO CONNECT TO DATABASE")
+            exit()
+
+        for i in records:
+            if i['partner'] == partner:  # if the entered email is at row index i in 'partner' column, who to email is at that same index in 'email' column
+                who_to_email = records[i]['email']  # who we email
+                # name of who we email
+                name_of_who_to_email = records[i]['member']
+                break
+            else:
+                continue
+
+        for j in records:
+            if j['email'] == partner:  # if the entered email is at row index i in 'email' column, the name of the target is at that same index in 'member' column
+                # NAme of persons secret santa
+                name_of_secret_santa = records[j]['member']
+                break
+            else:
+                continue
+            msg = Message('Your Secret Santa Assignment is in!',  # subject
+                          sender='OptimalSecretSanta@gmail.com',
+                          recipients=[who_to_email])
+            msg.body = F"Hi {name_of_who_to_email},\n\n You have been assigned as the Secret Santa for {name_of_secret_santa}.Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
+            thr = Thread(target=send_thread_email, args=[msg])
+            thr.start()  # wiley add end
+        print(partner, wlist)
+        return render_template('success.html')
 
 
 if __name__ == '__main__':
