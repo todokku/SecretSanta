@@ -36,7 +36,7 @@ Install `virtualenv` to create a Python virtual environment in this directory.
 python -m pip install --user virtualenv
 python -m venv venv
 ```
-Be sure the update your `venv` to the latest supported version of `python`.
+(**Optional**) Update your `venv` to the latest supported version of `python`.
 ```
 python -m venv --upgrade YOUR_VENV_PATH
 ```
