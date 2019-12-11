@@ -138,7 +138,6 @@ def wish_submit():
 
         try:
             engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-            records = {}#experiment by Wiley
             records = engine.execute('SELECT * FROM "secretsanta"').fetchall()
         except:
             print("FAILURE TO CONNECT TO DATABASE")
