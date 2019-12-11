@@ -11,4 +11,4 @@ while True:
     if all([f[a] != f[b] for a, b in assignments.items()]):
         break
 for a, b in assignments.items():
-    print("{} ({}) -> {} ({})".format(a, f[a], b, f[b]))
+    print("{}\t({}) -> {}\t({})".format(a, f[a], b, f[b]))
