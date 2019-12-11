@@ -21,8 +21,8 @@ app.config.update(  # added by Wiley
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='OptimalSecretSanta@gmail.com',
-    MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
-    SECRET_KEY=os.environ['SPECIAL_KEY'],
+    # MAIL_PASSWORD=os.environ['EMAIL_PASSWORD'],
+    # SECRET_KEY=os.environ['SPECIAL_KEY'],
     MAIL_MAX_EMAILS=1000
 )
 
@@ -123,34 +123,11 @@ def submit():
         return render_template('success.html')
 
 
-@app.route('/wishlist/')
-@app.route('/wishlist/<userid>')
-def wishlist(userid=None):
-    
-    
-    try:
-        engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-        records = engine.execute('SELECT * FROM "secretsanta"').fetchall()
-    except:
-        print("FAILURE TO CONNECT TO DATABASE")
-        exit()
-   
-    for i in records:
-        if i['partner'] == email: #if the entered email is at row index i in 'partner' column, who to email is at that same index in 'email' column
-            who_to_email = records[i]['email'] #who we email
-            name_of_who_to_email = records[i]['member'] #name of who we email
-            break
-        else:
-            continue
-
-        for j in records:
-            if j['email'] == email: #if the entered email is at row index i in 'email' column, the name of the target is at that same index in 'member' column
-                name_of_secret_santa = records[j]['member'] #NAme of persons secret santa
-                break
-            else:
-                continue  
-    
-    return render_template('wishlist.html', userid=userid)
+@app.route('/return')
+def wishlist():
+    if request.method == 'POST':
+        partner = request.form.get('partner')
+        return render_template('wishlist.html', userid=userid)
 
 
 if __name__ == '__main__':
