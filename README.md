@@ -7,10 +7,11 @@ Go to http://optimal-secret-santa.herokuapp.com/ and have fun!
 
 **Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments.  
 **Features**
-* No account registration required! Just provide your name and email
-* Automatically emails each person who they are giving a present to
+* No account registration required! Just provide the names and emails of each member
+* No spam! We encrypt and store your emails, and will never send you unnecessary emails (unlike some online Secret Santa apps...)
+* Automatically emails each person their gift assignment (who to give to)
 * Lets the gift recipients send a message, such as a wishlist, to the email of their Secret Santa
-* Each member's Secret Santa remains anonymous
+* Each member's Secret Santa remains anonymous, you can't use math to guess who your Secret Santa is
 * You will never be assigned to yourself
 * If A is giving a gift to B, we won't generate a pairing where B is also giving to A
 
