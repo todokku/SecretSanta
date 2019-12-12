@@ -138,17 +138,19 @@ def wish_submit():
         wlist = str(request.form.get('wishlist'))
         result = SecretSanta.query.filter_by(partner=partner).first()
         result.email
-        partner_email = SecretSanta.query.filter_by(email=parter).first()
+        partner_email = SecretSanta.query.filter_by(email=partner).first()
         parter_name = str(partner_email.member)
-        # print(partner, wlist, result.email,
-        # result.member, result.id, result.partner)
+        member_name = str(result.member)
+        partner_list = str(result.wlist)
+        #print(partner, wlist, result.email,
+              #result.member, result.id, result.partner)
         msg = Message('Your Secret Santa Assignment is in!',  # subject
                       sender='OptimalSecretSanta@gmail.com',
                       recipients=[result.email])
         msg.body = F"Hi {result.member},\n\n You have been assigned as the Secret Santa for {partner_name}.Their wishlist is included below: \n\n{result.wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
         thr = Thread(target=send_thread_email, args=[msg])
         thr.start()  # wiley add end
-        return render_template('success_wishlist.html')
+        return render_template('success.html')
 
 
 if __name__ == '__main__':
