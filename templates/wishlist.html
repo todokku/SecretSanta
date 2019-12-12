@@ -16,7 +16,7 @@
     
   </head>
   <header class="w3-display-container w3-content w3-center" style="max-width:1500px"> 
-    <img class="w3-image" src="../static/background_1.png" alt="secretsanta" width="1500" height="600">
+    <img class="w3-image centermain" src="../static/background_1.png" alt="secretsanta" width="1500" height="600">
     <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey" style = "margin-top: -15%; font-size: 175%;";>
       <h1 class="w3-hide-medium w3-hide-small w3-xxxxlarge">OPTIMAL</h1>
       <h5 class="w3-hide-large" style="white-space:nowrap">OPTIMAL SECRET SANTA</h5>
@@ -35,9 +35,7 @@
     <h2>Welcome! Please Enter Your Secret Santa Wishlist!</h2> 
   </div >
   <div class = "w3-display-containter w3-padding-large w3-center" style= "text-align: center" >
-    {% if message %}
-    <p class="message">{{ message | safe }}</p>
-    {% endif %}
+ 
     <form action="/return" method="POST">
       <div id="group-entry" class="form-group w3-display-containter w3-font" style= "text-align: center;">
        <div style= "font-family: Raleway">Enter Your Email:<br /></div>
