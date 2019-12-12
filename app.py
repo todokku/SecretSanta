@@ -138,10 +138,6 @@ def wish_submit():
         partner = str(request.form.get('partner'))
         wlist = str(request.form.get('wishlist'))
         result = SecretSanta.query.filter_by(partner=partner).first()
-        if result = NULL:
-            return render_template('')
-        else:
-            pass
         result.email
         partner_email = SecretSanta.query.filter_by(email=partner).first()
         partner_name = str(partner_email.member)
