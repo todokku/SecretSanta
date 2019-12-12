@@ -32,11 +32,11 @@
   <img src="../static/infographic1.png" alt="infographic" class="w3-image w3-margin-top" width="1000" height="500">
 
   <!-- Create A group -->
-  <div class=" w3-padding-large w3-padding-32 w3-margin-top" id="Create A Group" width = "750";>
-    <h3 class="w3-center Welcome">CREATE A GROUP</h3>
-    {% if message %}
+  {% if message %}
     <p class="message">{{ message | safe }}</p>
     {% endif %}
+  <div class=" w3-padding-large w3-padding-32 w3-margin-top" id="Create A Group" width = "750";>
+    <h3 class="w3-center Welcome">CREATE A GROUP</h3>
     
       <div class="CreateAGroup Welcome" style = "text-align: center">
        
