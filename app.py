@@ -67,8 +67,6 @@ class SecretSanta(db.Model):
     def __init__(self, member, email, partner):
         self.member = member
         self.email = email
-        # self.uuid = uuid
-        # self.wishlist = wishlist
         self.partner = partner
 
 
@@ -139,7 +137,7 @@ def wish_submit():
         result = SecretSanta.query.filter_by(partner=partner).first()
         result.email
         partner_email = SecretSanta.query.filter_by(email=partner).first()
-        parter_name = str(partner_email.member)
+        partner_name = str(partner_email.member)
         member_name = str(result.member)
         # partner_list = str(result.wlist)
         # print(partner, wlist, result.email,
