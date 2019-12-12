@@ -35,6 +35,9 @@
     <h2>Welcome! Please Enter Your Secret Santa Wishlist!</h2> 
   </div >
   <div class = "w3-display-containter w3-padding-large w3-center" style= "text-align: center" >
+    {% if message %}
+    <p class="message">{{ message | safe }}</p>
+    {% endif %}
     <form action="/return" method="POST">
       <div id="group-entry" class="form-group w3-display-containter w3-font" style= "text-align: center;">
        <div style= "font-family: Raleway">Enter Your Email:<br /></div>

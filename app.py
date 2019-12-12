@@ -49,20 +49,21 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:g4qtyx7v@localhost/test_db'
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zyyzysejezblhz:17a351947912f2433f7d4ca45121650d224b002543e633d521e57d4c4bb6d874@ec2-174-129-253-63.compute-1.amazonaws.com:5432/ddui50dco58tad' #if not debugging(aka normal circumstances assign this URI)
+    # if not debugging(aka normal circumstances assign this URI)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zyyzysejezblhz:17a351947912f2433f7d4ca45121650d224b002543e633d521e57d4c4bb6d874@ec2-174-129-253-63.compute-1.amazonaws.com:5432/ddui50dco58tad'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
 
-class SecretSanta(db.Model): #a class to represent a person within the secret santa
+class SecretSanta(db.Model):  # a class to represent a person within the secret santa
     __tablename__ = 'secretsanta'
     id = db.Column(db.Integer, primary_key=True)
-    member = db.Column(db.String(200)) #the person's name
-    email = db.Column(db.String(200), unique=True) #the person's email
+    member = db.Column(db.String(200))  # the person's name
+    email = db.Column(db.String(200), unique=True)  # the person's email
     wishlist = db.Column(db.Text())
-    partner = db.Column(db.String(200)) ##target partner's email
+    partner = db.Column(db.String(200))  # target partner's email
 
     def __init__(self, member, email, partner):
         self.member = member
@@ -70,7 +71,8 @@ class SecretSanta(db.Model): #a class to represent a person within the secret sa
         self.partner = partner
 
 
-def generate_pairings(emails): #take people in the group and randomize and assign them to the proper partners
+# take people in the group and randomize and assign them to the proper partners
+def generate_pairings(emails):
     f = {}  # dict containing name:group
     for i, line in enumerate(emails):
         group = line.strip().split(" ")
@@ -78,7 +80,8 @@ def generate_pairings(emails): #take people in the group and randomize and assig
     names = list(f.keys())
 
     while True:
-        random.shuffle(names) #continually shuffles until every person has been shuffled
+        # continually shuffles until every person has been shuffled
+        random.shuffle(names)
         assignments = {a: b for a, b in zip(names, names[1:] + [names[0]])}
         if all([f[a] != f[b] for a, b in assignments.items()]):
             break
@@ -93,7 +96,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/submit', methods=['POST']) #run when user submits their info
+@app.route('/submit', methods=['POST'])  # run when user submits their info
 def submit():
     if request.method == 'POST':
         member = request.form.getlist('member')
@@ -135,6 +138,10 @@ def wish_submit():
         partner = str(request.form.get('partner'))
         wlist = str(request.form.get('wishlist'))
         result = SecretSanta.query.filter_by(partner=partner).first()
+        if result = NULL:
+            return render_template('')
+        else:
+            pass
         result.email
         partner_email = SecretSanta.query.filter_by(email=partner).first()
         partner_name = str(partner_email.member)
@@ -145,10 +152,10 @@ def wish_submit():
         msg = Message('Your Secret Santa Assignment is in!',  # subject
                       sender='OptimalSecretSanta@gmail.com',
                       recipients=[result.email])
-        msg.body = F"Hi {result.member},\n\n You have been assigned as the Secret Santa for {partner_name}.Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
+        msg.body = F"Hi {result.member},\n\nYou have been assigned as the Secret Santa for {partner_name}. Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
         thr = Thread(target=send_thread_email, args=[msg])
         thr.start()  # wiley add end
-        return render_template('success.html')
+        return render_template('success_wishlist.html')
 
 
 if __name__ == '__main__':
