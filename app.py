@@ -28,16 +28,16 @@ app.config.update(  # added by Wiley
     MAIL_MAX_EMAILS=1000
 )
 
-mail = Mail(app)  # added by Wiley
-s = URLSafeSerializer(app.config['SECRET_KEY'])  # added by Wiley
+mail = Mail(app)  # declares Mail instance
+s = URLSafeSerializer(app.config['SECRET_KEY'])  # safe serializer instance used for unique link gen
 
 
-def generate_token(email):  # added by Wiley
+def generate_token(email):  # Function to generate token for unique URL
     token = s.dumps(email, salt='email-confirm')
     return token
 
 
-def send_thread_email(msg):  # added by Wiley
+def send_thread_email(msg):  # emailing function using threading to send emails asynchronously
     with app.app_context():
         mail.send(msg)
 
@@ -112,14 +112,14 @@ def submit():
                     data = SecretSanta(
                         member=member[ii], email=email[ii], partner=pair[ii])
                     db.session.add(data)
-                    token = generate_token(email[ii])  # wiley add start
-                    link = url_for('wishlist', token=token, _external=True)
-                    msg = Message('Hello from Optimal Secret Santa!',  # subject
+                    token = generate_token(email[ii])  # token generated for unique URL
+                    link = url_for('wishlist', token=token, _external=True) #unique link created to route user to wishlist
+                    msg = Message('Hello from Optimal Secret Santa!',  # email message
                                   sender='OptimalSecretSanta@gmail.com',
                                   recipients=[email[ii]])
                     msg.body = F"Hi {member[ii]},\n\nGreetings from the North Pole!\n\nYou have been added to a Secret Santa group created on optimal-secret-santa.herokuapp.com.\n\nPlease use the below link to fill out the wishlist/message you would like to send your Secret Santa.\n\nLink:{link}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
-                    thr = Thread(target=send_thread_email, args=[msg])
-                    thr.start()  # wiley add end
+                    thr = Thread(target=send_thread_email, args=[msg]) #create thread for asynchronous mail
+                    thr.start()  
                 else:
                     return render_template('index.html', message='A user with this email is already a part of Secret Santa')
         db.session.commit()
@@ -145,12 +145,12 @@ def wish_submit():
         # partner_list = str(result.wlist)
         # print(partner, wlist, result.email,
         # result.member, result.id, result.partner)
-        msg = Message('Your Secret Santa Assignment is in!',  # subject
+        msg = Message('Your Secret Santa Assignment is in!',  # generates email message for assignment email
                       sender='OptimalSecretSanta@gmail.com',
                       recipients=[result.email])
         msg.body = F"Hi {result.member},\n\nYou have been assigned as the Secret Santa for {partner_name}. Their wishlist is included below: \n\n{wlist}\n\nHappy Holidays!\n\nSincerely,\nOptimalSecretSanta"
         thr = Thread(target=send_thread_email, args=[msg])
-        thr.start()  # wiley add end
+        thr.start()  # send email asynchronously
         return render_template('success_wishlist.html')
 
 
