@@ -101,8 +101,8 @@ def submit():
     if request.method == 'POST':
         member = request.form.getlist('member')
         email = request.form.getlist('email')
-        if len(email) >= len(set(email)):
-            return render_template('index.html', message="Please don't enter duplicate emails")
+        # if len(email) >= len(set(email)):
+        #    return render_template('index.html', message="Please don't enter duplicate emails")
         pair = generate_pairings(email)
         print(member, email, pair)
         for ii in range(len(member)):
