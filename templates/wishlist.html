@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Optimal Secret Santa</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../static/secret_santa_website.css">
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../static/favicon.ico"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-      body {background-image: url("../static/background_1.png"); background-repeat:no-repeat; background-size:cover;}
-    </style>  
-  </head>
-  <header class="w3-display-container w3-content w3-center" style="max-width:600px"> 
-    <img class="w3-image" src="../static/logo.png" alt="secretsanta" width="1500" height="600">
-  <div class="w3-display-middle w3-padding-large w3-wide w3-text-light-grey" style = "margin-top: -15%; font-size: 175%;";>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Optimal Secret Santa</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../static/secret_santa_website.css">
+  <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <style>
+    body {
+      background-image: url("../static/background_1.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+<header class="w3-display-container w3-content w3-center" style="max-width:600px">
+  <img class="w3-image" src="../static/logo.png" alt="secretsanta" width="1500" height="600">
+  <div class="w3-display-middle w3-padding-large w3-wide w3-text-light-grey" style="margin-top: -15%; font-size: 175%;"
+    ;>
   </div>
-  </header>
-  <body></body>
-    <div class = "Welcome w3-center w3-topmargin button-font-size">
-    <h6>Welcome! Please Enter Your Secret Santa Wishlist!</h6> 
-  </div >
-  <div class = "w3-display-containter w3-padding-large w3-center" style= "text-align: center" >
- 
-    <form action="/return" method="POST">
-      <div id="group-entry" class="form-group w3-display-containter w3-font" style= "text-align: center;">
-       <div style= "font-family: Raleway">Enter Your Email:<br /></div>
-        <input type="text" name="partner" />
-        <br />
-        <br />
-        <textarea
-          name="wishlist"
-          id="wishlist"
-          placeholder="Please enter your wishlist here!"
-          cols="50"
-          rows="10"
-        ></textarea>
-      </div>
+</header>
+
+<body></body>
+<div class="Welcome w3-center w3-topmargin button-font-size">
+  <h6>Welcome! Please Enter Your Secret Santa Wishlist!</h6>
+</div>
+<div class="w3-display-containter w3-padding-large w3-center" style="text-align: center">
+
+  <form action="/return" method="POST">
+    <div id="group-entry" class="form-group w3-display-containter w3-font" style="text-align: center;">
+      <div style="font-family: Raleway">Enter Your Email:<br /></div>
+      <input type="text" name="partner" />
       <br />
-      <input type="submit" value="Submit" class="w3-button w3-width w3-font w3-background-color w3-bar w3-round w3-hover-green" />
+      <br />
+      <textarea name="wishlist" id="wishlist" placeholder="Please enter your wishlist here!" cols="50"
+        rows="10"></textarea>
     </div>
-    </form>
-  </body>
+    <br />
+    <input type="submit" value="Submit"
+      class="w3-button w3-width w3-font w3-background-color w3-bar w3-round w3-hover-green" />
+</div>
+</form>
+</body>
+
 </html>
