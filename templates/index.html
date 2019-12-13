@@ -5,93 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../static/secret_santa_website.css">
 
-<link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico" />
+<link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../static/favicon.ico"
+    />
 
 <!-- Header -->
-<header class="w3-display-container w3-content w3-center" style="max-width:600px">
-  <img class="w3-image" src="../static/logo.png" alt="secretsanta" width="1500" height="600">
-  <div class="w3-display-middle w3-padding-large w3-wide w3-text-light-grey" style="margin-top: -15%; font-size: 175%;"
-    ;>
-    <!-- <h1 class="w3-hide-medium w3-hide-small w3-xxxxlarge">OPTIMAL</h1>
+<header class="w3-display-container w3-content w3-center" style="max-width:1500px"> 
+  <img class="w3-image" src="../static/background_1.png" alt="secretsanta" width="1500" height="600">
+  <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey" style = "margin-top: -15%; font-size: 175%;";>
+    <h1 class="w3-hide-medium w3-hide-small w3-xxxxlarge">OPTIMAL</h1>
     <h2 class="w3-hide-large">OPTIMAL</h2>
     <h5 class="w3-hide-large">SECRET SANTA</h5>
-    <h3 class="w3-hide-medium w3-hide-small">SECRET SANTA</h3> -->
+    <h3 class="w3-hide-medium w3-hide-small">SECRET SANTA</h3>
   </div>
 </header>
 
 <!-- Navbar on small screens -->
-<style>
-  body {
-    background-image: url("../static/background_1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-</style>
+
 
 <!-- Page content -->
 <div class="w3-content w3-padding-large w3-margin-top" id="About">
 
-
-
-
+  
+ 
+   
 
   <img src="../static/infographic1.png" alt="infographic" class="w3-image w3-margin-top" width="1000" height="500">
 
   <!-- Create A group -->
-  <div class=" w3-padding-large w3-padding-32 w3-margin-top" id="Create A Group" width="750" ;>
+  <div class=" w3-padding-large w3-padding-32 w3-margin-top" id="Create A Group" width = "750";>
     <h3 class="w3-center Welcome">CREATE A GROUP</h3>
   </div>
-
-
-  <div class="CreateAGroup Welcome" style="text-align: center">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    
+  
+      <div class="CreateAGroup Welcome" style = "text-align: center">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
     <body>
-      <form action="/submit" method="POST">
-        <div id="group-entry" style="text-align: center; align-content: center;"></div>
-        <input id="add-more" type="button" value="Add Members"
-          class="w3-bar-item w3-button w3-width w3-font w3-background-color w3-bar w3-round w3-hover-green"
-          style="margin-bottom: 15px; text-align: center;">
-        <br />
-        <input type="submit" value="Submit"
-          class=" w3-button w3-width w3-font w3-background-color w3-bar w3-round w3-hover-green"
-          style="text-align: center;">
-      </form>
-  </div>
-  </body>
-  <script>
-    var size_init = 3;
-    $(document).ready(function () {
-      for (var i = 1; i < size_init + 1; i++) {
-        var name_input = $('<input type="text"><br/>');
-        name_input.attr("name", "member");
-        name_input.attr("placeholder", "Enter Member " + i + "'s Name");
-        $("#group-entry").append(name_input);
+        
+        <form action="/submit" method="POST">
+            <div id="group-entry"  style = "text-align: center; align-content: center;"></div>
+            <input
+              id="add-more"
+              type="button"
+              value="Add Members"
+              class="w3-bar-item w3-button w3-width w3-font w3-background-color w3-bar w3-round w3-hover-green" 
+              style="margin-bottom: 15px; text-align: center;"
+            >
+            <br />
+            <input 
+            type="submit" 
+            value="Submit" 
+            class=" w3-button w3-width w3-font w3-background-color w3-bar w3-round "
+            style = "text-align: center;"
+            >
+          </form>
+        </div>
+      </body>
+      <script>var size_init = 3;
+        $(document).ready(function() {
+          for (var i = 1; i < size_init + 1; i++) {
+            var name_input = $('<input type="text"><br/>');
+            name_input.attr("name", "member");
+            name_input.attr("placeholder", "Enter Member " + i + "'s Name");
+            $("#group-entry").append(name_input);
+        
+            var email_input = $('<input type="text"><br/><br/>');
+            email_input.attr("name", "email");
+            email_input.attr("placeholder", "Enter Member " + i + "'s Email");
+            $("#group-entry").append(email_input);
+            // $("input").addClass("member");
+          }
+        
+          $("#add-more").click(function() {
+            size_init++;
+            var name_input = $('<input type="text"><br/>');
+            name_input.attr("name", "member");
+            name_input.attr("placeholder", "Enter Member " + size_init + "'s Name");
+            $("#group-entry").append(name_input);
+        
+            var email_input = $('<input type="text"><br/><br/>');
+            email_input.attr("name", "email");
+            email_input.attr("placeholder", "Enter Member " + size_init + "'s Email");
+            $("#group-entry").append(email_input);
+            //$("input").addClass("member");
+          });
+        });</script> 
+   
 
-        var email_input = $('<input type="text"><br/><br/>');
-        email_input.attr("name", "email");
-        email_input.attr("placeholder", "Enter Member " + i + "'s Email");
-        $("#group-entry").append(email_input);
-        // $("input").addClass("member");
-      }
-
-      $("#add-more").click(function () {
-        size_init++;
-        var name_input = $('<input type="text"><br/>');
-        name_input.attr("name", "member");
-        name_input.attr("placeholder", "Enter Member " + size_init + "'s Name");
-        $("#group-entry").append(name_input);
-
-        var email_input = $('<input type="text"><br/><br/>');
-        email_input.attr("name", "email");
-        email_input.attr("placeholder", "Enter Member " + size_init + "'s Email");
-        $("#group-entry").append(email_input);
-        //$("input").addClass("member");
-      });
-    });
-  </script>
-
-
-  <!-- End page content -->
+<!-- End page content -->
 
 </html>
