@@ -85,9 +85,9 @@ Ken   (4) -> Panat (3)
 
 * **Ben Leone** - *Front End Development* - [benleone90](https://github.com/benleone90)
 * **John Wiley Hunt** - *Email API* - [whunt1965](https://github.com/whunt1965)
-* **Josh Goldberg** - *Database Engineer* - [jdg555666](https://github.com/jdg555666)
-* **Ken Krebs** - *Front End Design* - [ken-krebs](https://github.com/ken-krebs)
-* **Panat Taranat** - *Back End and Algorithm* - [ptaranat](https://github.com/ptaranat)
+* **Josh Goldberg** - *SQL Database Engineer* - [jdg555666](https://github.com/jdg555666)
+* **Ken Krebs** - *Front End Web Design* - [ken-krebs](https://github.com/ken-krebs)
+* **Panat Taranat** - *Back End, Algorithm, Logo Design, Video* - [ptaranat](https://github.com/ptaranat)
 
 ## License
 
