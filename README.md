@@ -6,6 +6,8 @@
 
 Go to http://bit.ly/optimalsanta and have fun!  
 
+Or see it in action on [Youtube!](https://www.youtube.com/watch?v=4cB6wEgXM6U) 
+
 **Features**
 * No account registration required! Just provide the names and emails of each member
 * No spam! We encrypt and store your emails, and will never send you unnecessary emails (unlike some online Secret Santa apps...)
