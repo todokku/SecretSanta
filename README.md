@@ -1,4 +1,4 @@
-[<img src="https://raw.githubusercontent.com/benleone90/OptimalSecretSanta/master/misc/repologo.png">](http://optimal-secret-santa.herokuapp.com/)
+[<img src="https://raw.githubusercontent.com/benleone90/OptimalSecretSanta/master/static/logo.png">](http://optimal-secret-santa.herokuapp.com/)
 
 # Optimal Secret Santa
 
