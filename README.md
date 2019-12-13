@@ -1,9 +1,7 @@
 # Optimal Secret Santa
 Go to http://optimal-secret-santa.herokuapp.com/ and have fun!
 
-<!--
-@Ken put a screenshot of the website and group creation here
--->
+![Optimal Secret Santa](https://raw.githubusercontent.com/benleone90/OptimalSecretSanta/master/misc/repologo.png)
 
 **Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments.  
 **Features**
