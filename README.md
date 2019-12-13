@@ -2,7 +2,10 @@
 
 # Optimal Secret Santa
 
-**Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments. Go to http://optimal-secret-santa.herokuapp.com/ and have fun! 
+**Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments.  
+
+Go to http://optimal-secret-santa.herokuapp.com/ and have fun!  
+
 **Features**
 * No account registration required! Just provide the names and emails of each member
 * No spam! We encrypt and store your emails, and will never send you unnecessary emails (unlike some online Secret Santa apps...)
