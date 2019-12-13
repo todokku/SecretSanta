@@ -1,6 +1,4 @@
-![Optimal Secret Santa](https://raw.githubusercontent.com/benleone90/OptimalSecretSanta/master/misc/repologo.png)
-
-# Optimal Secret Santa
+[<img src="https://raw.githubusercontent.com/benleone90/OptimalSecretSanta/master/misc/repologo.png">](http://optimal-secret-santa.herokuapp.com/)
 Go to http://optimal-secret-santa.herokuapp.com/ and have fun!
 
 **Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments.  
