@@ -4,7 +4,7 @@
 
 **Optimal Secret Santa** is a simple web application that allows a group of at least 3 people to generate gift exchange assignments via email.
 
-Go to http://bit.ly/optimalsanta and have fun!  
+Go to http://bit.ly/optimalsanta and have fun! Or visit [Youtube](https://www.youtube.com/watch?v=0nW2g290Akk) to see it in action!
 
 **Features**
 * No account registration required! Just provide the names and emails of each member
