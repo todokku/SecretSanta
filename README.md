@@ -6,7 +6,7 @@
 
 Go to http://bit.ly/optimalsanta and have fun!  
 
-Or see it in action on [Youtube!](https://www.youtube.com/watch?v=4cB6wEgXM6U) 
+Or see it in action on [Youtube!](https://www.youtube.com/watch?v=Qbax0_2-7Fk) 
 
 **Features**
 * No account registration required! Just provide the names and emails of each member
