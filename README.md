@@ -87,7 +87,7 @@ Ken   (4) -> Panat (3)
 * **John Wiley Hunt** - *Email API* - [whunt1965](https://github.com/whunt1965)
 * **Josh Goldberg** - *SQL Database Engineer* - [jdg555666](https://github.com/jdg555666)
 * **Ken Krebs** - *Front End Web Design* - [ken-krebs](https://github.com/ken-krebs)
-* **Panat Taranat** - *Back End, Algorithm, Logo Design, Video* - [ptaranat](https://github.com/ptaranat)
+* **Panat Taranat** - *Product and UX Design, Back End, Algorithm, Logo Design, Video* - [ptaranat](https://github.com/ptaranat)
 
 ## License
 
